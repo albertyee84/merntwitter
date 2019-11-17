@@ -43,9 +43,9 @@ export const login = user => dispatch =>
     .then(res => {
       const { token } = res.data;
       localStorage.setItem("jwtToken", token);
-      APIUtil.setAuthToken(token);
       const decoded = jwt_decode(token);
       dispatch(receiveCurrentUser(decoded));
+      APIUtil.setAuthToken(token);
     })
     .catch(err => {
       dispatch(receiveErrors(err.response.data));
